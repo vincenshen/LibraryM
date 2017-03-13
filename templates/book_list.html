@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}查看图书{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <a href="?category=" class="list-group-item {% if not current_category %}active{% endif %}" id="id_category_all">
+                            <strong>全部图书</strong>
+                        </a>
+                        {% for category in book_category %}
+                            <a href="?category={{ category.id }}" class="list-group-item {% ifequal current_category category.id|stringformat:"i" %}active{% endifequal %}" id="id_category_{{ category.id }}">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+
+                    </div>
+                    <a href="{% url "searchbook" %}" class="list-group-item" id="id_category_all">
+                        ---图书搜索---
+                    </a>
+
+                </div>
+                <div class="col-md-9 col-md-offset-2">
+
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>书名</th>
+                            <th>作者</th>
+                            <th>出版日期</th>
+                            <th>定价</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for book in all_books.object_list %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="{% url "bookdetail" book.id %}">{{ book.name }}</a></td>
+                                <td>{{ book.author }}</td>
+                                <td>{{ book.publish_date|date:"Y-m-d" }}</td>
+                                <td>{{ book.price|floatformat:2 }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>暂无图书</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pager">
+
+                            {% if all_books.has_previous %}
+                                <li class="long"><a href="?{{ all_books.previous_page_number.querystring }}">上一页</a></li>
+                            {% endif %}
+
+                            {% for page in all_books.pages %}
+                                {% if page %}
+                                    {% ifequal page all_books.number %}
+                                        <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                    {% else %}
+                                        <li><a href="?{{ page.querystring }}" class="pager">{{ page }}</a></li>
+                                    {% endifequal %}
+                                {% else %}
+                                    <li class="none"><a href="">...</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if all_books.has_next %}
+                                <li class="long"><a href="?{{ all_books.next_page_number.querystring }}">下一页</a></li>
+                            {% endif %}
+
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script language="javascript">
+       var query = window.location.search.substring(1);
+       for (var i=0;i<query.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable)}
+
+
+
+
+</script>
+
+{% endblock %}

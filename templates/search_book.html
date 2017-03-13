@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}登陆{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                <form action="{% url "searchbook" %}" method="post" autocomplete="off" class="form-horizontal">
+                    <h3 class="form-signin-heading text-center">&emsp;&emsp;&emsp;搜索图书</h3>
+                    <div class="form-group">
+                        <div class="col-md-9 col-md-offset-4">
+                            <input type="text" class="form-control" id="keywords" required name="keywords" placeholder="请输入书名或作者"
+                                   autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            <button class="btn btn btn-primary btn-block" type="submit">立即搜索</button>
+                        </div>
+                    </div>
+                {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

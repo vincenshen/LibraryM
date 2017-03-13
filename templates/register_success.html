@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}注册成功{% endblock %}
+
+{% block content %}
+
+     <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-3 well">
+                <h2>恭喜您注册成功!</h2>
+                <a href="{% url "login" %}"><h4>立即登录</h4></a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

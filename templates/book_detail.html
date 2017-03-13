@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}查看图书{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-0">
+                <div class="col-md-5">
+                    {% if book_detail.image %}
+                        <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+                            <img width="200" height="200" class="" src="{{ MEDIA_URL }}{{ book_detail.image }}">
+                        </div>
+                    {% else %}
+                        <h4>暂无图片</h4>
+                    {% endif %}
+                </div>
+                <div class="col-md-7 col-md-offset-0">
+                    <form method="post" action="{% url "borrowbook" %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="bookname" value="{{ book_detail.name }}">
+                        <input type="hidden" name="borrowuser" value="{{ request.user.username }}">
+                        <h2 class=""><strong>{{ book_detail.name }}</strong>&nbsp;
+                            <button style="height:30px;width:120px" class ="borrow_btn" type="submit">立即借阅</button></h2>
+                    </form>
+                    <br>
+                    <h4>作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者：{{ book_detail.author }}</h4>
+                    <h4>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：{{ book_detail.category }}</h4>
+                    <h4>出版日期：{{ book_detail.publish_date|date:"Y-m-d" }}</h4>
+                    <h4>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：{{ book_detail.price|floatformat:2 }}</h4>
+                    <h4>介&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绍：</h4>
+                    <textarea rows="5" cols="100" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ book_detail.desc }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
