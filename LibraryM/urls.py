@@ -20,7 +20,7 @@ import xadmin
 from django.views.static import serve
 from .settings import MEDIA_ROOT
 from users.views import IndexView, LoginView, RegisterView, LogoutView, ChangePasswordView
-from books.views import BookDetailView, BookListView, SearchBookView, BorrowBookView, BorrowListView
+from books.views import BookDetailView, BookListView, SearchBookView, BorrowBookView, BorrowListView, ReturnListView
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -42,4 +42,5 @@ urlpatterns = [
     url(r'^searchbook/$', SearchBookView.as_view(), name='searchbook'),
     url(r'^borrowbook/$', BorrowBookView.as_view(), name='borrowbook'),
     url(r'^borrowlist/$', BorrowListView.as_view(), name='borrowlist'),
+    url(r'^returnlist/$', ReturnListView.as_view(), name='returnlist'),
 ]

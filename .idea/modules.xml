@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/LibraryM.iml" filepath="$PROJECT_DIR$/.idea/LibraryM.iml" />
+      <module fileurl="file://D:/Python/TestDjango/.idea/TestDjango.iml" filepath="D:/Python/TestDjango/.idea/TestDjango.iml" />
+      <module fileurl="file://D:/Python/Thread/.idea/Thread.iml" filepath="D:/Python/Thread/.idea/Thread.iml" />
     </modules>
   </component>
 </project>

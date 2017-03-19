@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Django
+Source Server         : localhost
 Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : library
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-03-13 13:45:46
+Date: 2017-03-19 13:59:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -243,15 +243,20 @@ CREATE TABLE `books_borrowlist` (
   `borrow_date` date NOT NULL,
   `book_name` varchar(128) NOT NULL,
   `borrow_user` varchar(128) NOT NULL,
+  `return_book` varchar(10) NOT NULL,
+  `return_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of books_borrowlist
 -- ----------------------------
-INSERT INTO `books_borrowlist` VALUES ('5', '2017-03-13', 'C语言程序设计', 'ericli');
-INSERT INTO `books_borrowlist` VALUES ('6', '2017-03-13', 'Java程序设计', 'ericli');
-INSERT INTO `books_borrowlist` VALUES ('7', '2017-03-13', 'Linux系统及应用', 'ericli');
+INSERT INTO `books_borrowlist` VALUES ('5', '2017-03-13', 'C语言程序设计', 'ericli', 'wgh', '0000-00-00');
+INSERT INTO `books_borrowlist` VALUES ('6', '2017-03-13', 'Java程序设计', 'ericli', 'wgh', '0000-00-00');
+INSERT INTO `books_borrowlist` VALUES ('7', '2017-03-13', 'Linux系统及应用', 'ericli', 'wgh', '0000-00-00');
+INSERT INTO `books_borrowlist` VALUES ('8', '2017-03-18', 'C语言程序设计', 'alexler', 'wgh', null);
+INSERT INTO `books_borrowlist` VALUES ('9', '2017-03-19', 'Java程序设计', 'alexler', 'ygh', '2017-03-19');
+INSERT INTO `books_borrowlist` VALUES ('10', '2017-03-19', 'C语言程序设计', 'libadmin', 'ygh', '2017-03-19');
 
 -- ----------------------------
 -- Table structure for `captcha_captchastore`
@@ -265,17 +270,12 @@ CREATE TABLE `captcha_captchastore` (
   `expiration` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hashkey` (`hashkey`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of captcha_captchastore
 -- ----------------------------
-INSERT INTO `captcha_captchastore` VALUES ('118', 'GMJI', 'gmji', '5c410799917344d44936f8b80a08c5117b98cc6e', '2017-03-13 00:40:51.471000');
-INSERT INTO `captcha_captchastore` VALUES ('121', 'YUFG', 'yufg', '693d694b52daadbb7fd2390607eb731d8345f45c', '2017-03-13 00:41:21.384000');
-INSERT INTO `captcha_captchastore` VALUES ('122', 'KSDR', 'ksdr', 'bc7188129f6b467a383a2463fccd2fda0fe2a7f8', '2017-03-13 00:41:32.059000');
-INSERT INTO `captcha_captchastore` VALUES ('126', 'YPXT', 'ypxt', 'b1ebeeb6f2fe9a6353aa17666aa1b66be958d418', '2017-03-13 00:43:56.633000');
-INSERT INTO `captcha_captchastore` VALUES ('127', 'LBGX', 'lbgx', '64ffde4c7879c3ed477e3d674c82bb1be58b8d86', '2017-03-13 13:41:21.740000');
-INSERT INTO `captcha_captchastore` VALUES ('128', 'NEDB', 'nedb', 'ef647bc8ba7cf3179f5d50c957fa1cdd38a63073', '2017-03-13 13:41:35.341000');
+INSERT INTO `captcha_captchastore` VALUES ('134', 'OMJU', 'omju', '08b249adea78fa4386118a099dc95b6fcda224dd', '2017-03-19 13:50:24.535000');
 
 -- ----------------------------
 -- Table structure for `django_admin_log`
@@ -341,7 +341,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -369,6 +369,10 @@ INSERT INTO `django_migrations` VALUES ('20', 'books', '0004_book_desc', '2017-0
 INSERT INTO `django_migrations` VALUES ('21', 'users', '0002_remove_userprofile_permission', '2017-03-12 14:27:35.549000');
 INSERT INTO `django_migrations` VALUES ('22', 'books', '0005_borrowlist', '2017-03-12 23:12:28.078000');
 INSERT INTO `django_migrations` VALUES ('23', 'books', '0006_auto_20170313_0006', '2017-03-13 00:06:59.423000');
+INSERT INTO `django_migrations` VALUES ('24', 'books', '0007_borrowlist_return_book', '2017-03-19 13:09:07.296000');
+INSERT INTO `django_migrations` VALUES ('25', 'books', '0008_auto_20170319_1324', '2017-03-19 13:25:05.244000');
+INSERT INTO `django_migrations` VALUES ('26', 'books', '0009_auto_20170319_1331', '2017-03-19 13:31:41.712000');
+INSERT INTO `django_migrations` VALUES ('27', 'books', '0010_auto_20170319_1336', '2017-03-19 13:36:25.323000');
 
 -- ----------------------------
 -- Table structure for `django_session`
@@ -385,6 +389,7 @@ CREATE TABLE `django_session` (
 -- ----------------------------
 -- Records of django_session
 -- ----------------------------
+INSERT INTO `django_session` VALUES ('1chbt35jz5uppprrbfdi9l2gig7ohr9v', 'NzQyMDY5MTc3YjBkNzg3YTM0YzRmNjY5OTc3NTU1M2ExNjNkODM4MTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MmE4OTE3YjRhZDNlZDYwZTI5OWVmYmYyYjhmNTc0NDY4MGIwZjQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=', '2017-04-02 13:45:58.248000');
 INSERT INTO `django_session` VALUES ('9xv2qmtfigtbrs1141zxtcjslcvhb71t', 'YzA2N2MxNTRhOGFkYTZkYWVjMDU5ZjgxMzkyNThjYTNhYWQ1MjgxNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiTElTVF9RVUVSWSI6W1siYm9va3MiLCJib29rIl0sIiJdLCJfYXV0aF91c2VyX2hhc2giOiJkZDRkYmZjODAxYmI4ZDJhNTc3NTFmNTViOWUxODcxYTA1ZTM5MWYyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==', '2017-03-26 11:06:14.847000');
 INSERT INTO `django_session` VALUES ('n89v2r83niw31bfu1xetodx5zi8dgcl4', 'MWVhZTBhMDVkNjc4ZmI3MTA2MTcyMGY2YjlkODE0NWUxMmQ0MGI3Nzp7IkxJU1RfUVVFUlkiOltbImJvb2tzIiwiYm9vayJdLCIiXSwiX2F1dGhfdXNlcl9oYXNoIjoiZGQ0ZGJmYzgwMWJiOGQyYTU3NzUxZjU1YjllMTg3MWEwNWUzOTFmMiIsIl9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==', '2017-03-26 10:32:08.257000');
 INSERT INTO `django_session` VALUES ('roti0h2yyb7w6tj5uj2vnq41qaotl3lh', 'YzA2N2MxNTRhOGFkYTZkYWVjMDU5ZjgxMzkyNThjYTNhYWQ1MjgxNzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiTElTVF9RVUVSWSI6W1siYm9va3MiLCJib29rIl0sIiJdLCJfYXV0aF91c2VyX2hhc2giOiJkZDRkYmZjODAxYmI4ZDJhNTc3NTFmNTViOWUxODcxYTA1ZTM5MWYyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==', '2017-03-26 10:10:37.507000');
@@ -416,9 +421,9 @@ CREATE TABLE `users_userprofile` (
 -- ----------------------------
 -- Records of users_userprofile
 -- ----------------------------
-INSERT INTO `users_userprofile` VALUES ('1', 'pbkdf2_sha256$30000$U4m5yMtmE1gj$gHqt+k7Kij3V2CnwAzjGEdeBwAmEwXwdmix3hLyuiNo=', '2017-03-13 00:42:30.235000', '1', 'libadmin', '', '', 'libadmin@qq.com', '1', '1', '2017-03-10 16:28:34.107000', 'admin', null, 'female', 'image/default.png');
+INSERT INTO `users_userprofile` VALUES ('1', 'pbkdf2_sha256$30000$U4m5yMtmE1gj$gHqt+k7Kij3V2CnwAzjGEdeBwAmEwXwdmix3hLyuiNo=', '2017-03-19 13:45:36.013000', '1', 'libadmin', '', '', 'libadmin@qq.com', '1', '1', '2017-03-10 16:28:34.107000', 'admin', null, 'female', 'image/default.png');
 INSERT INTO `users_userprofile` VALUES ('2', 'pbkdf2_sha256$30000$AxTwT4Sdf7kS$hHzh1utw5p+eVa3M7ji4iFJw97w5wb2i37qA7dItRtA=', null, '0', 'vincen', '', '', 'vincen@qq.com', '0', '1', '2017-03-12 14:13:08.352000', 'vincen', null, 'female', 'image/default.png');
-INSERT INTO `users_userprofile` VALUES ('4', 'pbkdf2_sha256$30000$yapl49HdF4uv$s/pCkMhj52jynkcznMiFCq7W1zsviqFNiODR7G0Zh3s=', null, '0', 'alexler', '', '', 'alex@qq.com', '0', '1', '2017-03-12 14:20:19.884000', 'alexler', null, 'female', 'image/default.png');
+INSERT INTO `users_userprofile` VALUES ('4', 'pbkdf2_sha256$30000$yapl49HdF4uv$s/pCkMhj52jynkcznMiFCq7W1zsviqFNiODR7G0Zh3s=', '2017-03-19 13:45:58.198000', '0', 'alexler', '', '', 'alex@qq.com', '0', '1', '2017-03-12 14:20:19.884000', 'alexler', null, 'female', 'image/default.png');
 INSERT INTO `users_userprofile` VALUES ('5', 'pbkdf2_sha256$30000$J8kRLeNQKlpv$MLOYatZH8VPa8mRP6ukGFrd1035mxHssoCCS5xaLg4Y=', '2017-03-13 00:38:44.312000', '0', 'ericli', '', '', 'eircli@qq.com', '0', '1', '2017-03-12 14:28:48.926000', '艾利克斯', null, 'female', 'image/default.png');
 
 -- ----------------------------
@@ -501,7 +506,7 @@ CREATE TABLE `xadmin_log` (
   KEY `xadmin_log_user_id_bb16a176_fk_users_userprofile_id` (`user_id`),
   CONSTRAINT `xadmin_log_content_type_id_2a6cb852_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `xadmin_log_user_id_bb16a176_fk_users_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `users_userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of xadmin_log
@@ -540,6 +545,14 @@ INSERT INTO `xadmin_log` VALUES ('31', '2017-03-12 11:06:14.598000', '127.0.0.1'
 INSERT INTO `xadmin_log` VALUES ('32', '2017-03-12 23:23:50.575000', '127.0.0.1', '3', 'BorrowList object', 'create', '已添加。', '14', '1');
 INSERT INTO `xadmin_log` VALUES ('33', '2017-03-12 23:25:45.300000', '127.0.0.1', '4', '借阅成功', 'create', '已添加。', '14', '1');
 INSERT INTO `xadmin_log` VALUES ('34', '2017-03-13 00:08:59.283000', '127.0.0.1', null, '', 'delete', '批量删除 2 个 借阅清单', null, '1');
+INSERT INTO `xadmin_log` VALUES ('35', '2017-03-19 13:11:26.879000', '127.0.0.1', '8', 'C语言程序设计', 'change', '修改 return_book', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('36', '2017-03-19 13:12:24.293000', '127.0.0.1', '7', 'Linux系统及应用', 'change', '修改 return_book', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('37', '2017-03-19 13:12:27.097000', '127.0.0.1', '6', 'Java程序设计', 'change', '修改 return_book', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('38', '2017-03-19 13:12:29.588000', '127.0.0.1', '5', 'C语言程序设计', 'change', '修改 return_book', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('39', '2017-03-19 13:34:47.394000', '127.0.0.1', '8', 'C语言程序设计', 'change', '没有字段被修改。', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('40', '2017-03-19 13:35:09.999000', '127.0.0.1', '9', 'Java程序设计', 'change', '修改 return_book', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('41', '2017-03-19 13:38:22.322000', '127.0.0.1', '10', 'C语言程序设计', 'change', '修改 return_book 和 return_date', '14', '1');
+INSERT INTO `xadmin_log` VALUES ('42', '2017-03-19 13:45:13.345000', '127.0.0.1', '9', 'Java程序设计', 'change', '修改 return_book 和 return_date', '14', '1');
 
 -- ----------------------------
 -- Table structure for `xadmin_usersettings`

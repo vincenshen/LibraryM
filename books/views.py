@@ -92,7 +92,25 @@ class BorrowListView(LoginRequired, View):
     def get(self, request):
         borrow_user = request.user.username
         all_books = BorrowList.objects.filter(borrow_user=borrow_user)
+        all_books = all_books.filter(return_book="wgh")
+        # 分页功能
+        try:
+            page = request.GET.get("page", 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(all_books, 10, request=request)
+        all_books = p.page(page)
+        return render(request, "borrow_list.html", {"all_books": all_books})
 
+
+class ReturnListView(LoginRequired, View):
+    """
+    归还清单
+    """
+    def get(self, request):
+        borrow_user = request.user.username
+        all_books = BorrowList.objects.filter(borrow_user=borrow_user)
+        all_books = all_books.filter(return_book="ygh")
         # 分页功能
         try:
             page = request.GET.get("page", 1)

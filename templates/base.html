@@ -37,6 +37,7 @@
                 <li id="view_book"><a class="navbar-brand" href="{% url "booklist" %}">图书列表&nbsp;&nbsp;</a></li>
                 <li id="view_book"><a class="navbar-brand" href="{% url "searchbook" %}">搜索图书&nbsp;&nbsp;</a></li>
                 <li id="view_book"><a class="navbar-brand" href="{% url "borrowlist" %}">借阅清单&nbsp;&nbsp;</a></li>
+                <li id="view_book"><a class="navbar-brand" href="{% url "returnlist" %}">归还清单&nbsp;&nbsp;</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}

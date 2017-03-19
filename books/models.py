@@ -38,7 +38,10 @@ class Book(models.Model):
 class BorrowList(models.Model):
     book_name = models.CharField(max_length=128, verbose_name=u"图书名")
     borrow_user = models.CharField(max_length=128, verbose_name=u"借阅人")
+    return_book = models.CharField(max_length=10, default=u"wgh", choices=(("wgh", u"未归还"), ("ygh", u"已归还")), verbose_name=u"是否归还")
     borrow_date = models.DateField(default=datetime.now, verbose_name=u"借阅时间")
+    return_date = models.DateField(null=True, default=None, blank=True, verbose_name=u"归还时间")
+
 
     class Meta:
         verbose_name = u"借阅清单"
@@ -46,3 +49,11 @@ class BorrowList(models.Model):
 
     def __unicode__(self):
         return self.book_name
+
+
+# class ReturnList(models.Model):
+#     name = models.ForeignKey(BorrowList, verbose_name=u"图书名")
+#     user = models.ForeignKey(BorrowList, verbose_name=u"借阅人")
+#     return_book = models.CharField(max_length=10, default=u"未归还", choices=(("wgh", u"未归还"), ("ygh", u"已归还")),
+#                                    verbose_name=u"是否归还")
+#     return_date = models.DateField(default=datetime.now, verbose_name=u"借阅时间")

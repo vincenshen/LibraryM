@@ -18,9 +18,10 @@ class BookDictAdmin(object):
 
 
 class BorrowListAdmin(object):
-    list_display = ("book_name", "borrow_user", "borrow_date")
-    search_fields = ("book_name", "borrow_user")
-
+    list_display = ("book_name", "borrow_user", "borrow_date", "return_book", "return_date")
+    search_fields = ("book_name", "borrow_user", "return_book")
+    list_filter = ("book_name", "borrow_user", "borrow_date", "return_book", "return_date")
+    readonly_fields = ["book_name", "borrow_user", "borrow_date"]
 
 xadmin.site.register(BookDict, BookDictAdmin)
 xadmin.site.register(Book, BookAdmin)
