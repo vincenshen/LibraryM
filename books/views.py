@@ -118,4 +118,4 @@ class ReturnListView(LoginRequired, View):
             page = 1
         p = Paginator(all_books, 10, request=request)
         all_books = p.page(page)
-        return render(request, "borrow_list.html", {"all_books": all_books})
+        return render(request, "return_list.html", {"all_books": all_books})
